@@ -1,0 +1,575 @@
+{
+  "board": {
+    "x": 19.95,
+    "y": 19.95,
+    "w": 50.1,
+    "h": 50.1,
+    "title": "Hades Micro 50x50mm Flight Controller PCB",
+    "layers_used": [
+      "F.Cu",
+      "B.Cu",
+      "Edge.Cuts",
+      "F.SilkS"
+    ],
+    "unit": "mm"
+  },
+  "nodes": [
+    {
+      "id": "STM32",
+      "ref": "MCU1",
+      "x": 46.74,
+      "y": 52.07,
+      "name": "STM32F405 MCU",
+      "chip": "STM32F405RGT6 (168MHz ARM Cortex-M4)",
+      "role": "Central Flight Controller (Decide)",
+      "color": "#2c7be5",
+      "pins": 64,
+      "description": "Executes PID attitude control loop, processes IMU sensor data, commands ESCs."
+    },
+    {
+      "id": "IMU",
+      "ref": "IMU1",
+      "x": 45.25,
+      "y": 38.9,
+      "name": "BMI088 6-DOF IMU",
+      "chip": "Bosch BMI088 (Accel + Gyro)",
+      "role": "Attitude & Inertial Sensor (Sense)",
+      "color": "#00b894",
+      "pins": 16,
+      "description": "Measures 3-axis angular rates and 3-axis linear acceleration at 1kHz."
+    },
+    {
+      "id": "PMU",
+      "ref": "REG1",
+      "x": 37.01,
+      "y": 23.72,
+      "name": "Power Management",
+      "chip": "LD39200PU33R 3.3V LDO / VIN",
+      "role": "Power Delivery (3.3V & Battery)",
+      "color": "#d63031",
+      "pins": 8,
+      "description": "Steps down battery voltage to clean 3.3V logic rail and monitors battery voltage."
+    },
+    {
+      "id": "GPS",
+      "ref": "GPS1",
+      "x": 55.75,
+      "y": 64.77,
+      "name": "GPS Navigation Port",
+      "chip": "Molex 4-pin UART GPS Interface",
+      "role": "Position & Navigation (Sense)",
+      "color": "#0984e3",
+      "pins": 4,
+      "description": "Receives latitude, longitude, velocity, and UTC time from u-blox GPS."
+    },
+    {
+      "id": "Comm",
+      "ref": "TELEM1",
+      "x": 59.44,
+      "y": 25.15,
+      "name": "Telemetry / USB Comm",
+      "chip": "CH330 USB-UART / Telemetry",
+      "role": "Ground Station Link (Comm)",
+      "color": "#6c5ce7",
+      "pins": 8,
+      "description": "Transfers live telemetry and commands via UAVLink protocol to base station."
+    },
+    {
+      "id": "ESC",
+      "ref": "PWM1",
+      "x": 36.2,
+      "y": 37.34,
+      "name": "ESC Motor Drivers",
+      "chip": "PCA9685BS 8-Ch PWM Controller",
+      "role": "Motor Actuation (Act)",
+      "color": "#e67e22",
+      "pins": 28,
+      "description": "Generates 400Hz DShot/PWM signals for quadcopter electronic speed controllers."
+    }
+  ],
+  "aux_nodes": [
+    {
+      "id": "BAR",
+      "ref": "BAR1",
+      "x": 37.55,
+      "y": 44.36,
+      "name": "BMP388 Barometer",
+      "chip": "Bosch BMP388 Pressure Sensor",
+      "role": "Altitude Hold Sensor",
+      "color": "#00cec9",
+      "pins": 10,
+      "description": "Measures atmospheric pressure for precise altitude hold estimation."
+    },
+    {
+      "id": "MAG",
+      "ref": "MAG1",
+      "x": 45.25,
+      "y": 31.9,
+      "name": "IIS2MDCTR Magnetometer",
+      "chip": "ST IIS2MDC 3-Axis Compass",
+      "role": "Heading Sensor",
+      "color": "#e17055",
+      "pins": 12,
+      "description": "Detects magnetic north to correct heading drift in the flight controller."
+    }
+  ],
+  "functional_edges": [
+    {
+      "a": "PMU",
+      "b": "STM32",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 26.5,
+      "vias": 1,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power",
+      "description": "Regulated 3.3V VDD power supply to microcontroller core."
+    },
+    {
+      "a": "IMU",
+      "b": "STM32",
+      "nets": [
+        "I2C1_SCL",
+        "I2C1_SDA",
+        "INT_GYR",
+        "INT_ACC"
+      ],
+      "weight": 20.4,
+      "vias": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "sensor",
+      "description": "High-priority attitude telemetry and gyro data-ready interrupts."
+    },
+    {
+      "a": "GPS",
+      "b": "STM32",
+      "nets": [
+        "UART2_TX",
+        "UART2_RX"
+      ],
+      "weight": 27.8,
+      "vias": 1,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "comm",
+      "description": "NMEA navigation coordinates and speed sentences over UART2."
+    },
+    {
+      "a": "Comm",
+      "b": "STM32",
+      "nets": [
+        "UART1_TX",
+        "UART1_RX"
+      ],
+      "weight": 42.8,
+      "vias": 1,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "comm",
+      "description": "Base station ground telemetry link and command uplink."
+    },
+    {
+      "a": "ESC",
+      "b": "STM32",
+      "nets": [
+        "I2C1_SCL",
+        "I2C1_SDA",
+        "PWM_OE"
+      ],
+      "weight": 24.1,
+      "vias": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "motor",
+      "description": "Motor mixer output commands to PCA9685 PWM generator."
+    },
+    {
+      "a": "ESC",
+      "b": "PMU",
+      "nets": [
+        "VSERVO",
+        "+5V"
+      ],
+      "weight": 28.6,
+      "vias": 0,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power",
+      "description": "High-current servo/motor power rail direct from power supply."
+    }
+  ],
+  "aux_edges": [
+    {
+      "a": "BAR",
+      "b": "STM32",
+      "nets": [
+        "I2C1_SCL",
+        "I2C1_SDA",
+        "INT_BAR"
+      ],
+      "weight": 22.9,
+      "vias": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "sensor",
+      "description": "Barometric pressure altitude reporting."
+    },
+    {
+      "a": "MAG",
+      "b": "STM32",
+      "nets": [
+        "I2C1_SCL",
+        "I2C1_SDA",
+        "INT_MAG"
+      ],
+      "weight": 30.9,
+      "vias": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "sensor",
+      "description": "3-Axis compass magnetic orientation."
+    }
+  ],
+  "mesh_edges": [
+    {
+      "a": "Comm",
+      "b": "ESC",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "Comm",
+      "b": "GPS",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "Comm",
+      "b": "IMU",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "Comm",
+      "b": "PMU",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "Comm",
+      "b": "STM32",
+      "nets": [
+        "+3V3",
+        "UART1_TX",
+        "UART1_RX"
+      ],
+      "weight": 236.4,
+      "vias": 30,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "comm"
+    },
+    {
+      "a": "ESC",
+      "b": "GPS",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "ESC",
+      "b": "IMU",
+      "nets": [
+        "+3V3",
+        "I2C1_SCL",
+        "I2C1_SDA"
+      ],
+      "weight": 309.0,
+      "vias": 38,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "sensor"
+    },
+    {
+      "a": "ESC",
+      "b": "PMU",
+      "nets": [
+        "+3V3",
+        "VSERVO"
+      ],
+      "weight": 179.3,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "ESC",
+      "b": "STM32",
+      "nets": [
+        "+3V3",
+        "I2C1_SCL",
+        "I2C1_SDA"
+      ],
+      "weight": 309.0,
+      "vias": 38,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "motor"
+    },
+    {
+      "a": "GPS",
+      "b": "IMU",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "GPS",
+      "b": "PMU",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "GPS",
+      "b": "STM32",
+      "nets": [
+        "+3V3",
+        "UART2_TX",
+        "UART2_RX"
+      ],
+      "weight": 206.3,
+      "vias": 30,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "comm"
+    },
+    {
+      "a": "IMU",
+      "b": "PMU",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    },
+    {
+      "a": "IMU",
+      "b": "STM32",
+      "nets": [
+        "+3V3",
+        "I2C1_SCL",
+        "I2C1_SDA",
+        "INT_GYR",
+        "INT_ACC"
+      ],
+      "weight": 362.1,
+      "vias": 42,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "sensor"
+    },
+    {
+      "a": "PMU",
+      "b": "STM32",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 150.7,
+      "vias": 28,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power"
+    }
+  ],
+  "drc_summary": {
+    "unconnected_nets": 0,
+    "total_tracks": 1065,
+    "total_vias": 86,
+    "status": "PASSED_ROUTING_COMPLETE",
+    "notes": "Fully routed double-sided PCB layout. Zero unconnected nets."
+  },
+  "erc_summary": {
+    "status": "PASSED_SCHEMATIC_VALIDATED",
+    "unconnected_pins": 0,
+    "power_flags_verified": true
+  },
+  "edges": [
+    {
+      "a": "PMU",
+      "b": "STM32",
+      "nets": [
+        "+3V3"
+      ],
+      "weight": 26.5,
+      "vias": 1,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power",
+      "description": "Regulated 3.3V VDD power supply to microcontroller core."
+    },
+    {
+      "a": "IMU",
+      "b": "STM32",
+      "nets": [
+        "I2C1_SCL",
+        "I2C1_SDA",
+        "INT_GYR",
+        "INT_ACC"
+      ],
+      "weight": 20.4,
+      "vias": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "sensor",
+      "description": "High-priority attitude telemetry and gyro data-ready interrupts."
+    },
+    {
+      "a": "GPS",
+      "b": "STM32",
+      "nets": [
+        "UART2_TX",
+        "UART2_RX"
+      ],
+      "weight": 27.8,
+      "vias": 1,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "comm",
+      "description": "NMEA navigation coordinates and speed sentences over UART2."
+    },
+    {
+      "a": "Comm",
+      "b": "STM32",
+      "nets": [
+        "UART1_TX",
+        "UART1_RX"
+      ],
+      "weight": 42.8,
+      "vias": 1,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "comm",
+      "description": "Base station ground telemetry link and command uplink."
+    },
+    {
+      "a": "ESC",
+      "b": "STM32",
+      "nets": [
+        "I2C1_SCL",
+        "I2C1_SDA",
+        "PWM_OE"
+      ],
+      "weight": 24.1,
+      "vias": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "signal_type": "motor",
+      "description": "Motor mixer output commands to PCA9685 PWM generator."
+    },
+    {
+      "a": "ESC",
+      "b": "PMU",
+      "nets": [
+        "VSERVO",
+        "+5V"
+      ],
+      "weight": 28.6,
+      "vias": 0,
+      "layers": [
+        "F.Cu"
+      ],
+      "signal_type": "power",
+      "description": "High-current servo/motor power rail direct from power supply."
+    }
+  ]
+}

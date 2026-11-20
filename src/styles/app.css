@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AEROLAB Aerospace Instrumentation Design System Tokens */
+:root {
+  --bg-app: #080D14;
+  --bg-sidebar: #0B121B;
+  --bg-panel: #101A26;
+  --bg-elevated: #152231;
+  --bg-hover: #1B2B3D;
+  --border-subtle: #223244;
+  --border-strong: #344A60;
+  --text-primary: #E8EEF5;
+  --text-secondary: #A4B3C3;
+  --text-muted: #718397;
+  --accent-cyan: #55C8E8;
+  --accent-blue: #4C8DFF;
+  --accent-green: #36C98F;
+  --accent-amber: #F2B45B;
+  --accent-red: #F06B70;
+  --accent-violet: #A78BFA;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Design Token Classes */
+.bg-app { background-color: var(--bg-app); }
+.bg-sidebar { background-color: var(--bg-sidebar); }
+.bg-panel { background-color: var(--bg-panel); }
+.bg-elevated { background-color: var(--bg-elevated); }
+.bg-hover:hover { background-color: var(--bg-hover); }
+
+.border-subtle { border-color: var(--border-subtle); }
+.border-strong { border-color: var(--border-strong); }
+
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+
+.text-accent-cyan { color: var(--accent-cyan); }
+.text-accent-blue { color: var(--accent-blue); }
+.text-accent-green { color: var(--accent-green); }
+.text-accent-amber { color: var(--accent-amber); }
+.text-accent-red { color: var(--accent-red); }
+.text-accent-violet { color: var(--accent-violet); }
+
+/* Aerospace Glassmorphic & Modern UI Utilities */
+.glass-panel {
+  background: rgba(16, 26, 38, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(52, 74, 96, 0.4);
+}
+
+.glass-elevated {
+  background: rgba(21, 34, 49, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(85, 200, 232, 0.22);
+}
+
+.glass-hud {
+  background: rgba(11, 18, 27, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(52, 74, 96, 0.55);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.hud-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(16, 26, 38, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(52, 74, 96, 0.45);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+
+.glow-cyan {
+  box-shadow: 0 0 16px rgba(85, 200, 232, 0.35);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 16px rgba(54, 201, 143, 0.35);
+}
+
+.glow-amber {
+  box-shadow: 0 0 16px rgba(242, 180, 91, 0.35);
+}
+
+.glow-rose {
+  box-shadow: 0 0 16px rgba(240, 107, 112, 0.4);
+}
+
+/* Animation Keyframes */
+@keyframes traceFlow {
+  to { stroke-dashoffset: -20; }
+}
+
+.edge-active {
+  stroke-dasharray: 6 4;
+  animation: traceFlow 0.8s linear infinite;
+}
+
+@keyframes criticalPulse {
+  0%, 100% { transform: scale(1); opacity: 0.95; }
+  50% { transform: scale(1.35); opacity: 0.35; }
+}
+
+.glow-critical {
+  animation: criticalPulse 1.2s infinite;
+}
+
+@keyframes radarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-sweep {
+  transform-origin: center;
+  animation: radarSweep 4s linear infinite;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-app); }
+::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 4px; border: 1px solid var(--border-strong); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+/* Subtle CRT Grid background */
+.crt-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+}

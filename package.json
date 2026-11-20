@@ -1,0 +1,39 @@
+{
+  "name": "fc-graph-lab",
+  "version": "2.0.0",
+  "description": "Drone Flight Controller KiCad PCB Graph Simulator with AI Copilot & Real-Time Audio",
+  "author": "Sansriti Mishra, Agnibha Nanda, Pavani Agarwal, Ashutosh Pandey",
+  "license": "MIT",
+  "scripts": {
+    "build": "node build.js",
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node tests/test_algorithms.js && node tests/test_production.js"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.187.0"
+  },
+  "keywords": [
+    "kicad",
+    "pcb",
+    "graph-theory",
+    "drone",
+    "flight-controller",
+    "dijkstra",
+    "tarjan",
+    "prim",
+    "pid",
+    "ai-copilot"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.29.13",
+    "@babel/preset-env": "^7.29.14",
+    "@babel/preset-react": "^7.29.7",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.33",
+    "tailwindcss": "^3.4.19",
+    "terser": "^5.51.2"
+  }
+}

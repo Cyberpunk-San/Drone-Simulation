@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEROLAB — Flight Controller Graph Lab</title>
+  
+  <!-- Tailwind CSS & Google Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Theme Stylesheet -->
+  <link rel="stylesheet" href="src/theme.css">
+  <link rel="stylesheet" href="vendor/leaflet.css">
+
+  <!-- React 18 & ReactDOM & Babel Standalone & Three.js & Leaflet GIS Engine (Air-gap Offline Ready) -->
+  <script src="vendor/react.production.min.js"></script>
+  <script src="vendor/react-dom.production.min.js"></script>
+  <script src="vendor/babel.min.js"></script>
+  <script src="vendor/three.min.js"></script>
+  <script src="vendor/leaflet.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            app: '#080D14',
+            sidebar: '#0B121B',
+            panel: '#101A26',
+            elevated: '#152231',
+            hover: '#19283A',
+            subtle: '#223244',
+            borderStrong: '#33485E',
+            primary: '#E6EDF3',
+            secondary: '#94A3B8',
+            muted: '#62748C',
+            accent: {
+              cyan: '#55C8E8',
+              amber: '#F2B45B',
+              green: '#36C98F',
+              red: '#F06B70'
+            }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="min-h-screen bg-[#080D14] text-[#E6EDF3] flex flex-col antialiased selection:bg-sky-500/30 selection:text-white">
+
+  <div id="root"></div>
+
+  <!-- 1. Data Models & Waypoints -->
+  <script src="src/data/board-metrics.js"></script>
+  <script src="src/data/graph-data.js"></script>
+  <script src="src/data/pipeline-stages.js"></script>
+  <script src="src/data/viva-questions.js"></script>
+  <script src="src/data/waypoints.js"></script>
+
+  <!-- 2. AI Audio & Voice Synthesis Engines -->
+  <script src="src/ai/audio-synth.js"></script>
+  <script src="src/ai/voice-synthesizer.js"></script>
+  <script src="src/ai/ai-engine.js"></script>
+
+  <!-- 3. Graph Algorithms & Intelligence Engines -->
+  <script src="src/algorithms/bfs.js"></script>
+  <script src="src/algorithms/dfs.js"></script>
+  <script src="src/algorithms/dijkstra.js"></script>
+  <script src="src/algorithms/spatial-energy-graph.js"></script>
+  <script src="src/algorithms/prim.js"></script>
+  <script src="src/algorithms/kruskal.js"></script>
+  <script src="src/algorithms/tarjan.js"></script>
+  <script src="src/algorithms/floyd-warshall.js"></script>
+  <script src="src/algorithms/degree-centrality.js"></script>
+  <script src="src/algorithms/cycles.js"></script>
+  <script src="src/algorithms/fault-simulator.js"></script>
+  <script src="src/algorithms/research-algorithms.js"></script>
+  <script src="src/algorithms/curriculum-algorithms.js"></script>
+  <script src="src/algorithms/fault-propagation-engine.js"></script>
+
+  <!-- 4. AEROLAB Core Shell Components (Babel Transpiled) -->
+  <script type="text/babel" src="src/components/ErrorBoundary.js"></script>
+  <script type="text/babel" src="src/components/Drone3DView.js"></script>
+  <script type="text/babel" src="src/components/Sidebar.js"></script>
+  <script type="text/babel" src="src/components/Topbar.js"></script>
+  <script type="text/babel" src="src/components/GuidedDemoModal.js"></script>
+
+  <!-- 5. AEROLAB Digital Twin & Flight Intelligence Screens (Babel Transpiled) -->
+  <script type="text/babel" src="src/pages/DigitalTwinStudioPage.js"></script>
+  <script type="text/babel" src="src/pages/LiveTelemetryPage.js"></script>
+  <script type="text/babel" src="src/pages/FaultPropagationPage.js"></script>
+  <script type="text/babel" src="src/pages/TwinVsRealityPage.js"></script>
+  <script type="text/babel" src="src/pages/WhatIfLabPage.js"></script>
+  <script type="text/babel" src="src/pages/CurriculumSyllabusPage.js"></script>
+  <script type="text/babel" src="src/pages/HardwareHarnessPage.js"></script>
+  <script type="text/babel" src="src/pages/OverviewPage.js"></script>
+  <script type="text/babel" src="src/pages/PcbExplorerPage.js"></script>
+  <script type="text/babel" src="src/pages/GraphAnalysisPage.js"></script>
+  <script type="text/babel" src="src/pages/FailureAnalysisPage.js"></script>
+  <script type="text/babel" src="src/pages/FlightSimulatorPage.js"></script>
+  <script type="text/babel" src="src/pages/BoardReportsPage.js"></script>
+  <script type="text/babel" src="src/pages/ResearchLabPage.js"></script>
+
+  <!-- 6. Application Root Orchestrator -->
+  <script type="text/babel" src="src/App.js"></script>
+
+  <!-- 7. Application Mount Point -->
+  <script src="src/main.js"></script>
+</body>
+</html>
